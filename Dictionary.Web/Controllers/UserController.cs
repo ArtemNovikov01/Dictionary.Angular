@@ -1,4 +1,5 @@
-﻿using Dictionary.Web.Handlers.Contracts;
+﻿using Dictionary.Domain.Exception;
+using Dictionary.Web.Handlers.Contracts;
 using Dictionary.Web.Models.Previews;
 using Dictionary.Web.Models.Request;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dictionary.Web.Controllers
 {
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
         private readonly IUserHandler _userHandler;
@@ -30,6 +32,10 @@ namespace Dictionary.Web.Controllers
             catch (ValidationException exception)
             {
                 return BadRequest(exception.ToString());
+            }
+            catch (UnprocessableEntityApplicationException exception) 
+            {
+                return UnprocessableEntity(exception.Message);
             }
         }
 
@@ -64,6 +70,10 @@ namespace Dictionary.Web.Controllers
             catch (ValidationException exception)
             {
                 return BadRequest(exception.ToString());
+            }
+            catch (UnprocessableEntityApplicationException exception)
+            {
+                return UnprocessableEntity(exception.Message);
             }
         }
 

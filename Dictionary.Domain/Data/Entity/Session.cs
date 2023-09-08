@@ -1,9 +1,6 @@
 ﻿using Dictionary.Domain.Data.Entity.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Dictionary.Domain.Data.Entity
 {
@@ -49,7 +46,6 @@ namespace Dictionary.Domain.Data.Entity
         {
             if (IsExpired)
             {
-                throw new Exception($"Session with id \"{Id}\" is already expired.");
             }
 
             IsExpired = true;

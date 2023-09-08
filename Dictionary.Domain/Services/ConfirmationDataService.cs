@@ -1,6 +1,7 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Dictionary.Domain.Data.Models.Configuration;
 using Dictionary.Domain.Data.Repositories.Contracts;
+using Dictionary.Domain.Exception;
 using Dictionary.Domain.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,8 @@ namespace Dictionary.Domain.Services
 
         public MatchConfirmationCodeInfo MatchConfirmationCode(string email, string confirmationCode)
         {
-            var confirmationData = _confirmationDataRepository.List().FirstOrDefault(confirmationData => confirmationData.Email == email);
+            var confirmationData = _confirmationDataRepository.List().FirstOrDefault(confirmationData => confirmationData.Email == email)
+                ?? throw new UnprocessableEntityApplicationException("Код недействителен, попробуйте получить его снова.");
 
             confirmationData.AddAttempt();
 

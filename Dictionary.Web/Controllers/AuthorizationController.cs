@@ -1,9 +1,12 @@
-﻿using Dictionary.Web.Infrastructure.Authorization;
+﻿using Dictionary.Domain.Exception;
+using Dictionary.Web.Infrastructure.Authorization;
 using Dictionary.Web.Models.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Web.Controllers
 {
+    [Route("api/authorization")]
     public class AuthorizationController : ControllerBase
     {
         private readonly ISignInManager _signInManager;
@@ -13,7 +16,20 @@ namespace Dictionary.Web.Controllers
             _signInManager = signInManager;
         }
 
+        /// <summary>
+        ///     Получение информации об аутентификации пользователя.
+        ///     Доступно всем.
+        /// </summary>
+        [HttpGet("is-authenticated")]
+        [AllowAnonymous]
+        public ActionResult<bool> IsAuthenticated() => Ok(User.Identity.IsAuthenticated);
+
+        /// <summary>
+        ///     Аутентификация и авторизация пользователя.
+        ///     Доступно всем.
+        /// </summary>
         [HttpPost("sign-in")]
+        [AllowAnonymous]
         public async Task<IActionResult> SignInAsync([FromBody]SignInRequest request)
         {
             try
@@ -22,9 +38,9 @@ namespace Dictionary.Web.Controllers
 
                 return NoContent();
             }
-            catch (Exception exception) 
+            catch (UnprocessableEntityApplicationException exception)
             {
-                return BadRequest(exception.ToString());
+                return UnprocessableEntity(exception.Message);
             }
         }
     }

@@ -11,6 +11,7 @@ namespace Dictionary.Domain.Data.Entity
     public class User :EntityBase<int>
     {
         private List<Session> _sessions = new();
+        private List<Word> _words = new();
 
         public User() { }
         public User(string login, string password, string email) 
@@ -52,5 +53,7 @@ namespace Dictionary.Domain.Data.Entity
         {
             Password = password;
         }
+
+        public IReadOnlyCollection<Word> words => _words.AsReadOnly();
     }
 }

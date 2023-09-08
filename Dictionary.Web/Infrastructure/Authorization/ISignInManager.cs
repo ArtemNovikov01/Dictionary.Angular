@@ -6,6 +6,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
 {
     public interface ISignInManager
     {
+        Task<bool> HasActiveSessionsAsync();
         Task SignInByPasswordAsync(SignInRequest request);
         Task SignOutAsync();
     }

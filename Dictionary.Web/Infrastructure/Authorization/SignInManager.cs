@@ -1,6 +1,7 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Dictionary.Domain.Data.Entity.Enum;
 using Dictionary.Domain.Data.Repositories.Contract;
+using Dictionary.Domain.Exception;
 using Dictionary.Web.Infrastructure.Extensions;
 using Dictionary.Web.Models.Request;
 using Microsoft.AspNetCore.Authentication;
@@ -24,7 +25,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
             _user = httpContextAccessor.HttpContext.User;
         }
 
-        public async Task<bool> HasActiveSessionAsync()
+        public async Task<bool> HasActiveSessionsAsync()
         {
             if(await _userRepository.GetByIdAsync(_user.GetId()) is { } user)
             {
@@ -55,6 +56,11 @@ namespace Dictionary.Web.Infrastructure.Authorization
                 _userRepository.Update(user);
 
                 await _httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, _user);
+            }
+
+            if (!_user.Identity.IsAuthenticated)
+            {
+                throw new UnprocessableEntityApplicationException("Ошибка аутентификации");
             }
         }
 

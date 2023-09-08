@@ -7,12 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\shared\models\requests\SignInRequest.ts" />
+    <None Remove="ClientApp\src\app\shared\services\registration.service.ts" />
+    <None Remove="ClientApp\src\polyfills.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="7.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dictionary.Domain\Dictionary.Domain.csproj" />
     <ProjectReference Include="..\Dictionary.Infrastructure\Dictionary.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\core\" />
+    <Folder Include="ClientApp\src\app\features\auth\components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\requests\SignInRequest.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\registration.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
   </ItemGroup>
 
 </Project>
