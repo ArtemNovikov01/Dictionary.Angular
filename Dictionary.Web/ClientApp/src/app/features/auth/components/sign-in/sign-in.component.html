@@ -1,15 +1,21 @@
-<form  [formGroup]="form">
+<form [formGroup]="form">
   <div>
     <label>Login</label>
-    <input formControlName="Login"/>
+    <input formControlName="Login" />
   </div>
   <div>
     <label>Password</label>
-    <input formControlName="Password"/>
+    <input formControlName="Password" />
   </div>
   <div>
     <button (click)="signIn()">
       Отправить
     </button>
   </div>
+  <div>
+    <button (click)="recoveryPassword()">
+      Восстановить пароль
+    </button>
+  </div>
 </form>
+

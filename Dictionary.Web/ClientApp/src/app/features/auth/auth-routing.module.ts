@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AuthPageComponent } from "./pages/auth-page.component";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
@@ -27,7 +26,7 @@ const routes: Routes = [
     {
       path: 'password-recovery',
       component: PasswordRecoveryComponent,
-    }
+    },
   ]
 }];
 

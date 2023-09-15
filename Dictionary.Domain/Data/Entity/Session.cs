@@ -46,6 +46,7 @@ namespace Dictionary.Domain.Data.Entity
         {
             if (IsExpired)
             {
+                throw new System.Exception($"Session with id \"{Id}\" is already expired.");
             }
 
             IsExpired = true;

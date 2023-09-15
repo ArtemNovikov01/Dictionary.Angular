@@ -1,3 +1,35 @@
-<div>
-  <ng-content></ng-content>
+<div *ngIf="enter">
+  <form [formGroup]="form">
+    <div>
+      <label>Придумайте логин</label>
+      <input formControlName="Login" />
+    </div>
+    <div>
+      <label>Придумайте пароль</label>
+      <input formControlName="Password" />
+    </div>
+    <div>
+      <label>Электронная почта</label>
+      <input formControlName="Email" />
+    </div>
+    <div>
+      <button (click)="confirmationCode()">
+        Отправить код подтверждения на почту
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="!enter">
+  <form [formGroup]="formConfirmation">
+    <div>
+      <label>Введите код подтверждения:</label>
+      <input formControlName="codeConfirmation" />
+    </div>
+    <div>
+      <button (click)="checkVerifyCode()">
+        Отправить код подтверждения на почту
+      </button>
+    </div>
+  </form>
 </div>

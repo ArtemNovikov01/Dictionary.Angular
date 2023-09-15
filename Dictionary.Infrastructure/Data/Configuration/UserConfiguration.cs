@@ -29,6 +29,11 @@ namespace Dictionary.Infrastructure.Data.Configuration
                 .WithOne(session => session.User)
                 .HasForeignKey(session => session.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(user => user.Role)
+               .WithMany(role => role.Users)
+               .HasForeignKey(role => role.RoleId)
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

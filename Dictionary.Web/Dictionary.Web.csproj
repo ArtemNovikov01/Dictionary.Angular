@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\shared\models\requests\SignInRequest.ts" />
+    <None Remove="ClientApp\src\app\core\core.module.ts" />
+    <None Remove="ClientApp\src\app\core\guards\auth.guard.ts" />
+    <None Remove="ClientApp\src\app\core\storage\user-info-storage.ts" />
+    <None Remove="ClientApp\src\app\shared\enums\role-type.ts" />
+    <None Remove="ClientApp\src\app\shared\models\auth\identity.ts" />
+    <None Remove="ClientApp\src\app\shared\models\auth\user-view.mode;.ts" />
+    <None Remove="ClientApp\src\app\shared\models\requests\add-user-request.ts" />
+    <None Remove="ClientApp\src\app\shared\models\requests\match-confirmation-code-request.model.ts" />
+    <None Remove="ClientApp\src\app\shared\models\requests\sign-in-request.ts" />
+    <None Remove="ClientApp\src\app\shared\models\users\attempt-info.model.ts" />
     <None Remove="ClientApp\src\app\shared\services\registration.service.ts" />
     <None Remove="ClientApp\src\polyfills.ts" />
   </ItemGroup>
@@ -23,12 +32,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\core\" />
+    <Folder Include="ClientApp\src\app\core\pages\" />
     <Folder Include="ClientApp\src\app\features\auth\components\" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\shared\models\requests\SignInRequest.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\core\core.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\core\guards\auth.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\core\storage\user-info-storage.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\enums\role-type.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\auth\identity.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\auth\user-view.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\requests\add-user-request.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\requests\match-confirmation-code-request.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\requests\sign-in-request.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\users\attempt-info.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\services\registration.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\polyfills.ts" />
   </ItemGroup>

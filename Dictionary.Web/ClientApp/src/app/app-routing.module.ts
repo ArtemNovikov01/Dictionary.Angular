@@ -1,11 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthModule } from './features/auth/auth.module';
+import { AuthGuard } from './core/guards/auth.guard';
+import { HomePageComponent } from './core/pages/home-page/home-page.component';
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: '',
-  loadChildren: () => import('./features/auth/auth.module').then((module) => module.AuthModule)
-}];
+  canActivate: [AuthGuard],
+  component: HomePageComponent,
+  },
+  {
+    path:'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((module) => module.AuthModule)
+  }
+
+];
+  
+  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

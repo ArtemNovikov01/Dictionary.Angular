@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, Subscription, takeUntil } from 'rxjs';
-import { SignInRequest } from 'src/app/shared/models/requests/SignInRequest';
+import { Subject, Subscription } from 'rxjs';
+import { SignInRequest } from 'src/app/shared/models/requests/sign-in-request';
 import { AuthorizationService } from 'src/app/shared/services/authorization.service';
 
 @Component({
@@ -10,13 +10,17 @@ import { AuthorizationService } from 'src/app/shared/services/authorization.serv
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
 })
-export class SignInComponent {
+export class SignInComponent implements OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
     private readonly router: Router,
     private readonly autorizationService: AuthorizationService
     ){}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
     subscription = new Subscription();
 
@@ -29,14 +33,20 @@ export class SignInComponent {
     this.subscription.add(
       this.autorizationService
         .signIn(this.form.value as SignInRequest)
+        .pipe()
         .subscribe({
           next: () => {
             this.router.navigate(['']);
           },
-          error: (error) =>{
-          }
+          error: () => {
+            this.router.navigate([''])
+          },
         })
     )
+  }
+
+  public recoveryPassword() {
+    this.router.navigate(['password-recovery']);
   }
 
 }

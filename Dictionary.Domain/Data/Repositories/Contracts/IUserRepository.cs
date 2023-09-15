@@ -10,5 +10,8 @@ namespace Dictionary.Domain.Data.Repositories.Contract
 {
     public interface IUserRepository : IRepositoriesBase<User>
     {
+        User GetWithRoleAndSession(string login, string password);
+        User GetByIdWithRoleAndSession(int id);
+        Task<User> GetByIdWithRoleAndSessionAsync(int id);
     }
 }

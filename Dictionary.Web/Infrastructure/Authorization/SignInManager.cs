@@ -4,9 +4,11 @@ using Dictionary.Domain.Data.Repositories.Contract;
 using Dictionary.Domain.Exception;
 using Dictionary.Web.Infrastructure.Extensions;
 using Dictionary.Web.Models.Request;
+using Dictionary.Web.Models.Views;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Serilog;
 
 namespace Dictionary.Web.Infrastructure.Authorization
 {
@@ -27,7 +29,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
 
         public async Task<bool> HasActiveSessionsAsync()
         {
-            if(await _userRepository.GetByIdAsync(_user.GetId()) is { } user)
+            if(await _userRepository.GetByIdWithRoleAndSessionAsync(_user.GetId()) is { } user)
             {
                 return user.ActiveSessions.Count > 0;
             }
@@ -42,9 +44,11 @@ namespace Dictionary.Web.Infrastructure.Authorization
                 return;
             }
 
-            var user = _userRepository.List().FirstOrDefault(userIdentity => 
-            userIdentity.Login == request.Login && 
-            userIdentity.Password == request.Password);
+            //var user = _userRepository.List().FirstOrDefault(userIdentity => 
+            //userIdentity.Login == request.Login && 
+            //userIdentity.Password == request.Password);
+
+            var user = _userRepository.GetWithRoleAndSession(request.Login, request.Password);
 
             if (user is not null) 
             {
@@ -89,7 +93,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
                 return;
             }
 
-            if(_userRepository.GetById(_user.GetId()) is { } user)
+            if(_userRepository.GetByIdWithRoleAndSession(_user.GetId()) is { } user)
             {
                 user.CloseActiveSessions();
 
@@ -97,6 +101,13 @@ namespace Dictionary.Web.Infrastructure.Authorization
             }
 
             await _httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        public UserIdentityModel GetIdentity(int requesterId)
+        {
+            var user = _userRepository.GetByIdWithRoleAndSession(requesterId);
+
+            return new UserIdentityModel(user.RoleId, user.Role.Name);
         }
     }
 }

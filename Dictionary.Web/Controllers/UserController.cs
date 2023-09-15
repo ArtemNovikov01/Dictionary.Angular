@@ -21,7 +21,7 @@ namespace Dictionary.Web.Controllers
         ///     Доступно всем.
         /// </summary>
         [HttpPost("user")]
-        public ActionResult AddUser(AddUserRequest request)
+        public ActionResult AddUser([FromBody] AddUserRequest request)
         {
             try
             {

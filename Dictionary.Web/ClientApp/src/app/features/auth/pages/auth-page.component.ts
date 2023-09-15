@@ -13,10 +13,9 @@ export class AuthPageComponent implements OnInit {
     private readonly authorizationService: AuthorizationService
   ) { }
 
-
   ngOnInit(): void {
     this.authorizationService
       .isAuthenticated()
-      .subscribe((isAuth) => (isAuth ? this.router.navigate(['']) :null));
+      .subscribe((isAuth) => (isAuth ? this.router.navigate(['']) : null));
   }
 }
