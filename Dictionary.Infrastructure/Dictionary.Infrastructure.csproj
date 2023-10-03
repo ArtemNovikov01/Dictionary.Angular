@@ -8,11 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+    <PackageReference Include="RepositoriesAndSpecification" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dictionary.Domain\Dictionary.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositoreis\Base\" />
   </ItemGroup>
 
 </Project>

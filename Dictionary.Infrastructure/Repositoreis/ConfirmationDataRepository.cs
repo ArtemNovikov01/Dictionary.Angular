@@ -1,12 +1,7 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Dictionary.Domain.Data.Repositories.Contracts;
 using Dictionary.Infrastructure.Data;
-using Dictionary.Infrastructure.Repositoreis.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RepositoriesAndSpecification.Repositories;
 
 namespace Dictionary.Infrastructure.Repositoreis
 {

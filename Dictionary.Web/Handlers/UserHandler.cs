@@ -47,7 +47,7 @@ namespace Dictionary.Web.Handlers
         public AttemptInfo PasswordRecovery(PasswordRecoveryRequest request)
         {
             var result = _userService.PasswordRecovery(request.Email.Trim(), request.ConfirmationCode.Trim(), request.Password.Trim());
-
+             
             return _attemptInfoMapper.ToAttemptInfo(result);
         }
     }

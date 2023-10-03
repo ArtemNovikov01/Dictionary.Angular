@@ -13,7 +13,7 @@ namespace Dictionary.Infrastructure.Data.Configuration
 
             base.Configure(builder);
 
-            builder.Property(role => role.Id).IsRequired().ValueGeneratedNever().HasIdentityOptions(startValue: 7);
+            builder.Property(role => role.Id).IsRequired().ValueGeneratedNever().HasIdentityOptions(startValue: 3);
 
             builder.HasMany(role => role.Users)
                .WithOne(user => user.Role)

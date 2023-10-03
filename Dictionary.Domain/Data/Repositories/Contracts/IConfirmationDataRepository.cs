@@ -1,12 +1,8 @@
 ﻿using Dictionary.Domain.Data.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RepositoriesAndSpecification.Repositories.Contracts;
 
 namespace Dictionary.Domain.Data.Repositories.Contracts
 {
-    public interface IConfirmationDataRepository :IRepositoriesReadBase<ConfirmationData>,IRepositoriesBase<ConfirmationData>
+    public interface IConfirmationDataRepository :IRepositoriesBase<ConfirmationData>
     {}
 }

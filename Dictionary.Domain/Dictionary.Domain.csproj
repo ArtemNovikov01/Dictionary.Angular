@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+    <PackageReference Include="RepositoriesAndSpecification" Version="1.0.4" />
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 

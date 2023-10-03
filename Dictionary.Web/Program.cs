@@ -63,10 +63,10 @@ app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";
 
-    if (app.Environment.IsDevelopment())
-    {
-        spa.UseAngularCliServer(npmScript: "start");
-    }
+    //if (app.Environment.IsDevelopment())
+    //{
+    //    spa.UseAngularCliServer(npmScript: "start");
+    //}
 });
 
 

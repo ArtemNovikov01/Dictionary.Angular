@@ -3,11 +3,6 @@ using Dictionary.Domain.Data.Models.Configuration;
 using Dictionary.Domain.Data.Repositories.Contracts;
 using Dictionary.Domain.Exception;
 using Dictionary.Domain.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dictionary.Domain.Services
 {

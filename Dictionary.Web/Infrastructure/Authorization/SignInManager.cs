@@ -2,13 +2,13 @@
 using Dictionary.Domain.Data.Entity.Enum;
 using Dictionary.Domain.Data.Repositories.Contract;
 using Dictionary.Domain.Exception;
+using Dictionary.Domain.Specifications;
 using Dictionary.Web.Infrastructure.Extensions;
 using Dictionary.Web.Models.Request;
 using Dictionary.Web.Models.Views;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
-using Serilog;
 
 namespace Dictionary.Web.Infrastructure.Authorization
 {
@@ -29,7 +29,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
 
         public async Task<bool> HasActiveSessionsAsync()
         {
-            if(await _userRepository.GetByIdWithRoleAndSessionAsync(_user.GetId()) is { } user)
+            if(_userRepository.GetBySpecification(new UserSpecificationId(_user.GetId())) is { } user)
             {
                 return user.ActiveSessions.Count > 0;
             }
@@ -46,9 +46,11 @@ namespace Dictionary.Web.Infrastructure.Authorization
 
             //var user = _userRepository.List().FirstOrDefault(userIdentity => 
             //userIdentity.Login == request.Login && 
-            //userIdentity.Password == request.Password);
+            //userIdentity.Password == request.Password); 
 
-            var user = _userRepository.GetWithRoleAndSession(request.Login, request.Password);
+            //var user = _userRepository.GetWithRoleAndSession(request.Login, request.Password);
+            var specification = new UserSpecificationRoleAndSessions(request.Login, request.Password);
+            var user = _userRepository.GetBySpecification(specification);
 
             if (user is not null) 
             {
@@ -93,7 +95,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
                 return;
             }
 
-            if(_userRepository.GetByIdWithRoleAndSession(_user.GetId()) is { } user)
+            if(_userRepository.GetBySpecification(new UserSpecificationId(_user.GetId())) is { } user)
             {
                 user.CloseActiveSessions();
 
@@ -105,7 +107,7 @@ namespace Dictionary.Web.Infrastructure.Authorization
 
         public UserIdentityModel GetIdentity(int requesterId)
         {
-            var user = _userRepository.GetByIdWithRoleAndSession(requesterId);
+            var user = _userRepository.GetBySpecification(new UserSpecificationId(requesterId));
 
             return new UserIdentityModel(user.RoleId, user.Role.Name);
         }

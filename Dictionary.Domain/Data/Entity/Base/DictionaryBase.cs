@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dictionary.Domain.Data.Entity.Base
+﻿namespace Dictionary.Domain.Data.Entity.Base
 {
     public abstract class DictionaryBase<TKey> : EntityBase<TKey>
         where TKey : struct
