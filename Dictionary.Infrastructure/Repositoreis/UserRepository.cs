@@ -1,7 +1,6 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Dictionary.Domain.Data.Repositories.Contract;
 using Dictionary.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 using RepositoriesAndSpecification.Repositories;
 
 namespace Dictionary.Infrastructure.Repositoreis

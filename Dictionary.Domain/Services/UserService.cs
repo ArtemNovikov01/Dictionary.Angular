@@ -1,16 +1,9 @@
 ﻿using Dictionary.Domain.Data.Entity;
-using Dictionary.Domain.Data.Entity.Enum;
 using Dictionary.Domain.Data.Models;
 using Dictionary.Domain.Data.Models.Configuration;
 using Dictionary.Domain.Data.Repositories.Contract;
 using Dictionary.Domain.Exception;
 using Dictionary.Domain.Services.Contracts;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dictionary.Domain.Services
 {
@@ -33,7 +26,7 @@ namespace Dictionary.Domain.Services
         public void AddUser(AddUserModel model)
         {
             var user = new User(model.Login, model.Password, model.Email);
-            CheckOtherDesignerInOrganization(model.Login);
+            CheckLogin(model.Login, model.Email);
             _userRepository.Add(user);
         }
 
@@ -55,14 +48,25 @@ namespace Dictionary.Domain.Services
             };
         }
 
-        private void CheckOtherDesignerInOrganization(string login)
+        private void CheckLogin(string login, string email)
         {
-                if (_userRepository.List().FirstOrDefault(user => user.Login == login) is { })
-                {
-                    //throw new UnprocessableEntityApplicationException(_logger,
-                    //    $"Пользователь с логином={login} уже существует",
-                    //    "Измените логин");
-                }
+            var users = _userRepository.List();
+
+            int countLogin = 0;
+            int countEmail = 0;
+
+            foreach (var user in users) 
+            {
+                if(user.Login == login) countLogin++;
+
+                if(user.Email == email) countEmail++;
+            }
+
+            if (countLogin > 0)
+                throw new UnprocessableEntityApplicationException($"Логин {login} занят другим пользователем.");
+
+            if (countEmail > 0)
+                throw new UnprocessableEntityApplicationException($"Аккаунт с эл.почтой {email} уже существует.");
         }
 
         public void UpdatePassword(User user, string password)
