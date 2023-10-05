@@ -2,6 +2,7 @@
 using Dictionary.Domain.Data.Models;
 using Dictionary.Web.Mappers.Contracts;
 using Dictionary.Web.Models.Request;
+using Dictionary.Web.Validators.Authorization;
 
 namespace Dictionary.Web.Mappers
 {
@@ -9,14 +10,19 @@ namespace Dictionary.Web.Mappers
     {
         public UserMapper() { }
 
-        public AddUserModel ToModel(AddUserRequest request) =>
-            new()
+        public AddUserModel ToModel(AddUserRequest request)
+        {
+            var registValid = new RegistrationValidator (request);
+
+            registValid.CheckValid();
+
+          return  new()
             {
                 Login = request.Login,
                 Password = request.Password,
                 Email = request.Email,
                 Role = RoleType.User
             };
-
+        }
     }
 }

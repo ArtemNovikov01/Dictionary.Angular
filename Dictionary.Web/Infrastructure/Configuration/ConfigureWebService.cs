@@ -3,6 +3,10 @@ using Dictionary.Web.Handlers.Contracts;
 using Dictionary.Web.Infrastructure.Authorization;
 using Dictionary.Web.Mappers;
 using Dictionary.Web.Mappers.Contracts;
+using Dictionary.Web.Validators.Authorization;
+using Dictionary.Web.Validators.Authorization.Contracts;
+using Dictionary.Web.Validators.Base;
+using Dictionary.Web.Validators.Base.Contracts;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Dictionary.Web.Infrastructure.Configuration

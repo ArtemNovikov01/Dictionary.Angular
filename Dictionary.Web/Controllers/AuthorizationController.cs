@@ -5,7 +5,6 @@ using Dictionary.Web.Models.Request;
 using Dictionary.Web.Models.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 
 
 namespace Dictionary.Web.Controllers
