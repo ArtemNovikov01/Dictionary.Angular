@@ -31,6 +31,7 @@ namespace Dictionary.Web.Infrastructure.Configuration
         {
             services.AddTransient<IConfirmationDataRepository, ConfirmationDataRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IWordRepository, WordRepository>();
 
             return services;
         }
@@ -39,6 +40,7 @@ namespace Dictionary.Web.Infrastructure.Configuration
         {
             services.AddTransient<IConfirmationDataService, ConfirmationDataService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IWordService, WordService>();
 
             return services;
         }

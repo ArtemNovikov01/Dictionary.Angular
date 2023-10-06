@@ -20,6 +20,7 @@ namespace Dictionary.Web.Infrastructure.Configuration
         private static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             services.AddTransient<IUserHandler, UserHandler>();
+            services.AddTransient<IWordHandler, WordHandler>();
 
             return services;
         }
@@ -28,6 +29,7 @@ namespace Dictionary.Web.Infrastructure.Configuration
         {
             services.AddTransient<IAttemptInfoMapper, AttemptInfoMapper>();
             services.AddTransient<IUserMapper, UserMapper>();
+            services.AddTransient<IWordMapper, WordMapper>();
 
             return services;
         }

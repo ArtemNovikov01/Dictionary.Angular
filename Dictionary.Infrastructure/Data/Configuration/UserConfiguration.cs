@@ -1,11 +1,6 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dictionary.Infrastructure.Data.Configuration
 {
@@ -24,6 +19,7 @@ namespace Dictionary.Infrastructure.Data.Configuration
             builder.Property(user => user.CreationDate).IsRequired();
 
             builder.Ignore(user => user.ActiveSessions);
+            builder.Ignore(user => user.words);
 
             builder.HasMany(user => user.Sessions)
                 .WithOne(session => session.User)
@@ -33,6 +29,11 @@ namespace Dictionary.Infrastructure.Data.Configuration
             builder.HasOne(user => user.Role)
                .WithMany(role => role.Users)
                .HasForeignKey(role => role.RoleId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(user => user.words)
+               .WithOne(word => word.User)
+               .HasForeignKey(word => word.UserId)
                .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -20,11 +20,7 @@ namespace Dictionary.Infrastructure.Data.Configuration
             builder.Property(word => word.Id).IsRequired().UseIdentityAlwaysColumn();
             builder.Property(word => word.EngWord).IsRequired();
             builder.Property(word => word.RusWord).IsRequired();
-
-            builder.HasOne(word => word.User)
-                .WithMany(user => user.words)
-                .HasForeignKey(session => session.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(session => session.UserId).IsRequired().HasColumnName("Idf_User");
         }
     }
 }

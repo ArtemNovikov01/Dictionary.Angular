@@ -1,11 +1,6 @@
 ﻿using Dictionary.Domain.Data.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dictionary.Infrastructure.Data
 {
@@ -17,6 +12,8 @@ namespace Dictionary.Infrastructure.Data
         public DictionaryContext(DbContextOptions<DictionaryContext> options)
             :base(options) 
         {
+           // Database.EnsureDeleted();
+
             Database.EnsureCreated();
         }
 
